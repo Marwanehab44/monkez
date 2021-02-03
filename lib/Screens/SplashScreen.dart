@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             AnimatedSplashScreen(
               nextScreen: Home(),
-              animationDuration: Duration(seconds: 1),
+              animationDuration: Duration(seconds: 3),
               splash: Image.asset(
                 "assets/images/ambulance.png",
                 height: 600,
@@ -30,36 +30,28 @@ class _SplashScreenState extends State<SplashScreen> {
               pageTransitionType: PageTransitionType.rightToLeft,
             ),
             AnimatedPositioned(
-              curve: Curves.bounceIn,
+              duration: Duration(seconds: 2),
               bottom: 50,
               right: 30,
               left: 90,
               top: 440,
-              duration: Duration(seconds: 2),
-              child: Text(
-                'MONKIZ',
-                style: GoogleFonts.orbitron(
-                    fontSize: 30, color: Colors.white, letterSpacing: 15),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              margin: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.37)
-                  .add(EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.63)),
-              child: Opacity(
-                opacity: 0.3,
+              child: TweenAnimationBuilder(
+                duration: Duration(seconds: 4),
                 child: Text(
                   'Stay Safe',
                   style: GoogleFonts.orbitron(
-                    fontSize: 18,
-                    color: Colors.white,
-                    wordSpacing: 3,
-                    
-                  ),
+                      fontSize: 18,
+                      color: Colors.white,
+                      wordSpacing: 3,
+                      letterSpacing: 15),
                 ),
+                tween: Tween<double>(begin: 0, end: 1),
+                builder: (BuildContext context, double _val, Widget child) {
+                  return Opacity(
+                    opacity: _val,
+                    child: child,
+                  );
+                },
               ),
             ),
           ],
